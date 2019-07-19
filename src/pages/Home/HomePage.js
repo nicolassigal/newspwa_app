@@ -23,7 +23,7 @@ class HomePage extends Component {
     async fetchNews() {
         let {page, news: oldNews, loading} = this.state;
         this.setState({loading: true})
-        const response = await fetch(`http://localhost:5000/top-headlines?country=us&page=${page}`);
+        const response = await fetch(`${API_URL}/top-headlines?country=us&page=${page}`);
         const newsResp = await response.json();
         if (newsResp.length) {
             const news = [...oldNews, ...newsResp];

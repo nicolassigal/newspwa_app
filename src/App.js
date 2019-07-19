@@ -15,11 +15,9 @@ class App extends Component {
     }
 
     async componentDidMount() {
-
         this.setState({ loading: true });
-
         try {
-            const response = await fetch("http://localhost:5000/categories?country=us");
+            const response = await fetch(`${API_URL}/categories?country=us`);
             const categories = await response.json();
             this.setState({ categories, loading: false });
         } catch (e) {

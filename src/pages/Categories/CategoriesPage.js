@@ -33,7 +33,7 @@ class CategoriesPage extends Component {
         let {page, news: oldNews, id} = this.state;
         try {
         this.setState({loading: true});
-        const response = await fetch(`http://localhost:5000/top-headlines/${id}?country=us&page=${page}`)
+        const response = await fetch(`${API_URL}/top-headlines/${id}?country=us&page=${page}`)
         let newsResp =  await response.json();
         if (newsResp.length) {
             const news = [...oldNews, ...newsResp];

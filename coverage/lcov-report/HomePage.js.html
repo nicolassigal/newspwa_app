@@ -144,7 +144,7 @@ class HomePage extends Component {
     }
 &nbsp;
     async fetchNews() {
-        const response = await fetch("http://localhost:5000/top-headlines?country=us");
+        const response = await fetch(`${API_URL}/top-headlines?country=us`);
         const news = <span class="cstat-no" title="statement not covered" >await response.json();</span>
 <span class="cstat-no" title="statement not covered" >        this.setState({ news });</span>
     }

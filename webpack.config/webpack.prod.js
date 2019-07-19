@@ -10,6 +10,7 @@ const baseConfig = require('../webpack.config');
 const merge = require('webpack-merge');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const webpack = require('webpack');
 
 const config = {
   optimization: {
@@ -56,6 +57,9 @@ const config = {
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      "API_URL": JSON.stringify("https://chalhoubappserver.herokuapp.com")
+    }),
     new CleanWebpackPlugin(),
     new HtmlWebPackPlugin({ template: "src/index.html" }),
     new MiniCssExtractPlugin({
@@ -100,14 +104,14 @@ const config = {
           }
         },
         {
-          urlPattern: new RegExp('http://localhost:5000/categories'),
+          urlPattern: new RegExp('https://chalhoubappserver.herokuapp.com/categories'),
           handler: 'staleWhileRevalidate',
           options: {
             cacheName: 'news-api-category-cache'
           }
         },
         {
-          urlPattern: new RegExp('http://localhost:5000/top-headlines'),
+          urlPattern: new RegExp('https://chalhoubappserver.herokuapp.com/top-headlines'),
           handler: 'staleWhileRevalidate',
           options: {
             cacheName: 'news-api-headlines-cache',
