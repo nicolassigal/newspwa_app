@@ -78,35 +78,35 @@ const config = {
           runtimeCaching: [
             {
               urlPattern: new RegExp(/\.(?:png|gif|jpg|svg)$/),
-              handler: 'staleWhileRevalidate',
+              handler: 'StaleWhileRevalidate',
               options: {
                 cacheName: 'images-cache'
               }
             },
             {
               urlPattern: new RegExp(/^https:\/\/fonts\.googleapis\.com/),
-              handler: 'staleWhileRevalidate',
+              handler: 'StaleWhileRevalidate',
               options: {
                 cacheName: 'google-fonts-stylesheet-cache'
               }
             },
             {
               urlPattern: new RegExp(/^https:\/\/fonts\.gstatic\.com/),
-              handler: 'staleWhileRevalidate',
+              handler: 'StaleWhileRevalidate',
               options: {
                 cacheName: 'google-web-fonts-cache'
               }
             },
             {
               urlPattern: new RegExp('http://localhost:5000/categories'),
-              handler: 'staleWhileRevalidate',
+              handler: 'StaleWhileRevalidate',
               options: {
                 cacheName: 'news-api-category-cache'
               }
             },
             {
               urlPattern: new RegExp('http://localhost:5000/top-headlines'),
-              handler: 'staleWhileRevalidate',
+              handler: 'StaleWhileRevalidate',
               options: {
                 cacheName: 'news-api-headlines-cache',
               }
