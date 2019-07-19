@@ -8,6 +8,8 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require("path");
 const baseConfig = require('../webpack.config');
 const merge = require('webpack-merge');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 const config = {
   optimization: {
@@ -16,7 +18,8 @@ const config = {
   entry: "./src/index.js",
   output: {
     filename: "main.[contentHash].bundle.js",
-    path: path.resolve(__dirname, "../public")
+    path: path.resolve(__dirname, "../public"),
+    publicPath: '/'
   },
   devServer: {
     historyApiFallback: true,
@@ -62,9 +65,72 @@ const config = {
       {
         from: path.resolve(__dirname, "../src/assets"),
         to: path.resolve(__dirname, "../public/assets")
+      },
+      {
+        from: path.resolve(__dirname, "../src/service-worker.js"),
+        to: path.resolve(__dirname, "../public/service-worker.js")
       }
     ]),
-    new WebpackMd5Hash()
+    new WebpackMd5Hash(),
+    new WorkboxPlugin.GenerateSW({
+      swDest: 'service-worker.js',
+      clientsClaim: true,
+      skipWaiting: true,
+      navigateFallback: '/index.html',
+      runtimeCaching: [
+        {
+          urlPattern: new RegExp(/\.(?:png|gif|jpg|svg)$/),
+          handler: 'staleWhileRevalidate',
+          options: {
+            cacheName: 'images-cache'
+          }
+        },
+        {
+          urlPattern: new RegExp(/^https:\/\/fonts\.googleapis\.com/),
+          handler: 'staleWhileRevalidate',
+          options: {
+            cacheName: 'google-fonts-stylesheet-cache'
+          }
+        },
+        {
+          urlPattern: new RegExp(/^https:\/\/fonts\.gstatic\.com/),
+          handler: 'staleWhileRevalidate',
+          options: {
+            cacheName: 'google-web-fonts-cache'
+          }
+        },
+        {
+          urlPattern: new RegExp('http://localhost:5000/categories'),
+          handler: 'staleWhileRevalidate',
+          options: {
+            cacheName: 'news-api-category-cache'
+          }
+        },
+        {
+          urlPattern: new RegExp('http://localhost:5000/top-headlines'),
+          handler: 'staleWhileRevalidate',
+          options: {
+            cacheName: 'news-api-headlines-cache',
+          }
+        }
+      ]
+    }),
+    new WebpackPwaManifest({
+      name: 'News App',
+      short_name: 'News App',
+      description: 'World Wide News App',
+      background_color: '#fff',
+      orientation: "portrait",
+      display: "standalone",
+      start_url: "/",
+      icons: [
+        {
+          src: path.resolve('src/assets/icons/icon.png'),
+          sizes: [72,96, 128, 144, 152, 192, 384, 512],
+          destination: "assets/icons",
+        }
+      ]
+    })
   ]
 };
 

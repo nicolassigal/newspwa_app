@@ -10,9 +10,16 @@ const config = {
     entry: "./src/index.js",
     output: {
       filename: "main.bundle.js",
-      path: path.resolve(__dirname, "../public")
+      path: path.resolve(__dirname, "../public"),
+      publicPath: '/'
     },
     devtool: 'source-map',
+    devServer: {
+      contentBase: path.join(__dirname, "public"),
+        watchContentBase: true,
+        publicPath: "/",
+        historyApiFallback: true
+    },
     module: {
         rules: [
           {
@@ -52,8 +59,12 @@ const config = {
           {
             from: path.resolve(__dirname, "../src/assets"),
             to: path.resolve(__dirname, "../public/assets")
+          },
+          {
+            from: path.resolve(__dirname, "../src/service-worker.js"),
+            to: path.resolve(__dirname, "../public/service-worker.js")
           }
-        ]),
+        ])
       ] 
 }
 

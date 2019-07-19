@@ -1,0 +1,53 @@
+.article {
+    background: var(--bg-card-color);
+    border: 1px solid rgba(142, 142, 142, 0.1);
+    padding: 20px 10px;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: var(--txt-color);
+    &:active,
+    &:focus,
+    &:active:focus {
+        text-decoration: none;
+        color: var(--txt-color);
+        
+    }
+
+    &:hover {
+        text-decoration: none;
+        color: var(--txt-color);
+        box-shadow: var(--shadow-dark);
+        cursor: pointer;
+    }
+
+    &__title {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 16px;
+        padding-bottom: 10px;
+    }
+    &__description {
+        font-size: 14px;
+        font-weight: light;
+        line-height: 14px;
+    }
+    &__picture {
+        width: 100%;
+        height: 180px;
+        object-fit: contain;
+        &.preload{
+            opacity: 0;
+            background: var(--preload);
+            min-width: 100%;
+            filter: blur(3px);
+            min-height: 180px;
+            animation: flickerAnimation 3s infinite;
+        }
+    }
+}
+
+@keyframes flickerAnimation {
+    0%   { opacity:0; }
+    50%  { opacity:1; }
+    100% { opacity:0; }
+  }

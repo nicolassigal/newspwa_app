@@ -1,0 +1,52 @@
+.night-mode-switch {
+    position: absolute;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &__title {
+        font-size: 14px;
+        color: var(--txt-color);
+    }
+    input[type=checkbox]{
+        height: 0;
+        width: 0;
+        visibility: hidden;
+        & + label {
+            &:after{
+            background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Smithsonian_sun_logo_no_text.svg/512px-Smithsonian_sun_logo_no_text.svg.png");
+            }
+        }
+        &:checked + label {
+            background: $gold;
+            &:after {
+                left: calc(100% - 3px);
+                transform: translateX(-100%);
+                background-image: url("https://image.flaticon.com/icons/png/512/189/189180.png");
+            }
+        }
+    }
+    
+    label {
+        cursor: pointer;
+        text-indent: -9999px;
+        width: 50px;
+        height: 30px;
+        background: #e3e3e3;
+        display: block;
+        border-radius: 100px;
+        position: relative;
+        &:after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 25px;
+                height: 25px;
+            background-size: 100%;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+    }
+}
