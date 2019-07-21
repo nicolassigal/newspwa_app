@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ArticleList from '../../components/ArticleList';
-import NoArticles from '../../components/noArticles';
+import NoArticles from '../../components/NoArticles';
 class HomePage extends Component {
     constructor(props) {
         super(props);
@@ -33,7 +33,7 @@ class HomePage extends Component {
         }
         } catch(e) {
             this.setState({ loading:false });
-            console.log("failed to fetch home news", e);
+            console.log("failed to fetch home news");
         }
     }
 

@@ -4,8 +4,12 @@ exports[`Home Page Home page should render correctly 1`] = `
 <div
   className="home-page"
 >
-  <ul
-    className="article-list"
-  />
+  <div
+    className="no-news"
+  >
+    <h1>
+      Sorry, no news here to show
+    </h1>
+  </div>
 </div>
 `;

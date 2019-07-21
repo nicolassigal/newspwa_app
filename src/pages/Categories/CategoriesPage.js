@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ArticleList from '../../components/ArticleList';
-import NoArticles from '../../components/noArticles';
+import NoArticles from '../../components/NoArticles';
 
 class CategoriesPage extends Component {
     constructor(props){
