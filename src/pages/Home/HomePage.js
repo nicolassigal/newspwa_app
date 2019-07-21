@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ArticleList from '../../components/ArticleList';
+import NoArticles from '../../components/noArticles';
 class HomePage extends Component {
     constructor(props) {
         super(props);
@@ -22,12 +23,17 @@ class HomePage extends Component {
     async fetchNews() {
         let {page, news: oldNews, loading} = this.state;
         this.setState({loading: true})
+        try {
         const response = await fetch(`${API_URL}/top-headlines?country=us&page=${page}`);
         const newsResp = await response.json();
         if (newsResp.length) {
             const news = [...oldNews, ...newsResp];
             page = page + 1;
             this.setState({ news, page, loading:false });
+        }
+        } catch(e) {
+            this.setState({ loading:false });
+            console.log("failed to fetch home news", e);
         }
     }
 
@@ -44,10 +50,11 @@ class HomePage extends Component {
     }
 
     render() {
-        const { news } = this.state;
+        const { news, loading } = this.state;
         return (
             <div className="home-page">
-                {news && <ArticleList articles={news} />}
+                {!loading && !news.length && <NoArticles />}
+                {news.length ? <ArticleList articles={news} /> : null }
             </div>
         );
     }

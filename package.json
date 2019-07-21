@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run start-prod",
-    "start-dev": "webpack-dev-server --hot --inline --open --mode development --config webpack.config/webpack.dev.js --env.local",
+    "start-dev": "webpack-dev-server --hot --inline --open --mode development --config webpack.config/webpack.dev.js --env.dev",
     "start-prod": "npm run build-prod && node index.js",
     "test": "jest --config=jest.config.json",
     "coverage": "jest --config=jest.config.json --coverage",
-    "build": "webpack --mode production --config webpack.config/webpack.prod.js --env.local",
+    "build": "webpack --mode production --config webpack.config/webpack.prod.js --env.prod",
     "build-prod": "npm run build && npm run test"
   },
   "jest": {
