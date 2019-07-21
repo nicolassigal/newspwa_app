@@ -3,6 +3,8 @@ this project is a news SPA with offline support.
 This is the client side project, and is pointing to an api that is deployed in https://chalhoubappserver.herokuapp.com/
 to point to local api server, read the section  "Running with local api server"
 
+Deployed application url: http://chalhoubnews.herokuapp.com/
+
 ## Tech: 
 
 * React
@@ -11,6 +13,7 @@ to point to local api server, read the section  "Running with local api server"
 * Jest
 * Webpack
 * NodeJS - Express (test server)
+* Workbox (Service Worker Generator) - to dinamic caching according to environment.
 
 ## Dependencies: 
 you need to install nodeJS
