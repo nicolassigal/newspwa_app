@@ -84,7 +84,7 @@ module.exports = env => {
           runtimeCaching: [
             {
               urlPattern: new RegExp( /.*\.(?:png|jpg|jpeg|svg|gif)/),
-              handler: 'CacheFirst',
+              handler: 'StaleWhileRevalidate',
               options: {
                 cacheName: 'images-cache',
                 expiration: {
@@ -94,14 +94,14 @@ module.exports = env => {
             },
             {
               urlPattern: new RegExp(/^https:\/\/fonts\.googleapis\.com/),
-              handler: 'CacheFirst',
+              handler: 'StaleWhileRevalidate',
               options: {
                 cacheName: 'google-fonts-stylesheet-cache'
               }
             },
             {
               urlPattern: new RegExp(/^https:\/\/fonts\.gstatic\.com/),
-              handler: 'CacheFirst',
+              handler: 'StaleWhileRevalidate',
               options: {
                 cacheName: 'google-web-fonts-cache'
               }
