@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ArticleList from '../../components/ArticleList';
-import NoArticles from '../../components/NoArticles';
+import NoArticles from './../../components/NoArticles';
 class HomePage extends Component {
     constructor(props) {
         super(props);
