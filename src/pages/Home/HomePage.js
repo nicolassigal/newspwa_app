@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ArticleList from '../../components/ArticleList';
-import NoArticles from './../../components/NoArticles';
+import NoNews from './../../components/NoNews';
 class HomePage extends Component {
     constructor(props) {
         super(props);
@@ -53,7 +53,7 @@ class HomePage extends Component {
         const { news, loading } = this.state;
         return (
             <div className="home-page">
-                {!loading && !news.length && <NoArticles />}
+                {!loading && !news.length && <NoNews />}
                 {news.length ? <ArticleList articles={news} /> : null }
             </div>
         );

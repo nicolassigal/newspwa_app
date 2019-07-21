@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
-import NoArticles from './index';
+import NoNews from './index';
 import { shallow } from 'enzyme';
 
-describe('NoArticle component test', () => {
-  it('NoArticle component should render correctly', () => {
-   const wrapper = shallow(<NoArticles />)
+describe('NoNews component test', () => {
+  it('NoNews component should render correctly', () => {
+   const wrapper = shallow(<NoNews />)
    expect(wrapper).toMatchSnapshot();
   });
 });

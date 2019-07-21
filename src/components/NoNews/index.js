@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NoArticles = () => {
+const NoNews = () => {
     return(
         <div className="no-news">
             <h1>Sorry, no news here to show</h1>
@@ -8,4 +8,4 @@ const NoArticles = () => {
     )
 }
 
-export default NoArticles;
+export default NoNews;
