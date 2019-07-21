@@ -4,6 +4,8 @@ exports[`Not Found Page Not Found page should render correctly 1`] = `
 <div
   className="not-found-page"
 >
-  Not Found
+  <h1>
+    Sorry, we dont have that you are looking for.
+  </h1>
 </div>
 `;

@@ -40,6 +40,7 @@ class CategoriesPage extends Component {
             this.setState({ news, page, loading:false });
         }
         } catch(e) {
+            this.setState({ loading:false });
             console.log(`failed to fetch ${id} news`);
         }
     }
@@ -58,10 +59,13 @@ class CategoriesPage extends Component {
     }
 
     render() {
-        const {news} = this.state;
+        const {news, loading} = this.state;
        return (
         <div className="categories-page">
-            <ArticleList articles={news} />
+            {!loading && !news.length && <div className="no-news">
+                <h1>Sorry, no news here to show</h1>
+            </div>}
+            {news.length ? <ArticleList articles={news} /> : null }
         </div>
     ) 
     }

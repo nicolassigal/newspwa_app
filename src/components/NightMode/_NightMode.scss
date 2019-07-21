@@ -15,7 +15,7 @@
         visibility: hidden;
         & + label {
             &:after{
-            background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Smithsonian_sun_logo_no_text.svg/512px-Smithsonian_sun_logo_no_text.svg.png");
+            background-image: url("../assets/sun.png");
             }
         }
         &:checked + label {
@@ -23,7 +23,7 @@
             &:after {
                 left: calc(100% - 3px);
                 transform: translateX(-100%);
-                background-image: url("https://image.flaticon.com/icons/png/512/189/189180.png");
+                background-image: url("../assets/moon.png");
             }
         }
     }

@@ -23,6 +23,15 @@ you need to install nodeJS
 npm start
 ```
 
+ to only build the application
+
+```
+npm run build
+```
+this will generate a public folder with the project build output.
+
+
+
 in order to run this project in development mode
 
 ```
@@ -37,7 +46,7 @@ to test this project run:
 npm test
 ```
 
-to run test with coverage:
+to check coverage:
 
 ```
 npm run coverage
@@ -46,10 +55,10 @@ npm run coverage
 ## Running with local api server
 
 In case you'd like to run this app pointing to local api server: https://github.com/nicolassigal/newspwa_api
-you need to change in start-dev script the environment variable to local.
+you need to change in build script the environment variable to local.
 
 ```
-"start-dev": "webpack-dev-server --hot --inline --open --mode development --config webpack.config/webpack.dev.js --env.local"
+"build": "webpack --mode production --config webpack.config/webpack.prod.js --env.local",
 ```
 
 ## Author

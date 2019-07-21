@@ -10,9 +10,8 @@ const WorkboxPlugin = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const webpack = require('webpack');
 
-module.exports = (env) => {
-  const apiURL = env.local ? "http://localhost:5000" : "https://chalhoubappserver.herokuapp.com";
-  console.log("api url is:", apiURL, env.local);
+module.exports = env => {
+  const API_URL = env.local ? 'http://localhost:5000': 'https://chalhoubappserver.herokuapp.com';
   return {
     optimization: {
       minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
@@ -46,6 +45,12 @@ module.exports = (env) => {
           ]
         },
         {
+          test: /\.(png|jpg|svg)$/,
+          use: [
+            {loader: 'file-loader'}
+          ]
+        },
+        {
           test: /\.scss$/,
           use: [
             "style-loader",
@@ -59,7 +64,7 @@ module.exports = (env) => {
     },
     plugins: [
     new webpack.DefinePlugin({
-      "API_URL": JSON.stringify(apiURL)
+      "API_URL": JSON.stringify(API_URL)
     }),
     new CleanWebpackPlugin(),
     new HtmlWebPackPlugin({ template: "src/index.html" }),
@@ -80,38 +85,55 @@ module.exports = (env) => {
       navigateFallback: '/index.html',
       runtimeCaching: [
         {
-          urlPattern: new RegExp(/\.(?:png|gif|jpg|svg)$/),
-          handler: 'StaleWhileRevalidate',
+          urlPattern: new RegExp( /.*\.(?:png|jpg|jpeg|svg|gif)/),
+          handler: 'CacheFirst',
           options: {
-            cacheName: 'images-cache'
+            cacheName: 'images-cache',
+            expiration: {
+              maxAgeSeconds: 24 * 60 * 60, // 1 Day, news always changing
+            }
           }
         },
         {
           urlPattern: new RegExp(/^https:\/\/fonts\.googleapis\.com/),
-          handler: 'StaleWhileRevalidate',
+          handler: 'CacheFirst',
           options: {
             cacheName: 'google-fonts-stylesheet-cache'
           }
         },
         {
           urlPattern: new RegExp(/^https:\/\/fonts\.gstatic\.com/),
-          handler: 'StaleWhileRevalidate',
+          handler: 'CacheFirst',
           options: {
             cacheName: 'google-web-fonts-cache'
           }
         },
         {
-          urlPattern: new RegExp(`${apiURL}/categories`),
+          urlPattern: new RegExp('http://localhost:5000/categories'),
           handler: 'StaleWhileRevalidate',
           options: {
             cacheName: 'news-api-category-cache'
           }
         },
         {
-          urlPattern: new RegExp(`${apiURL}/top-headlines`),
+          urlPattern: new RegExp('http://localhost:5000/top-headlines'),
           handler: 'StaleWhileRevalidate',
           options: {
             cacheName: 'news-api-headlines-cache',
+          }
+        },
+        {
+          urlPattern: new RegExp('https://chalhoubappserver.herokuapp.com/categories'),
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheName: 'news-api-category-cache-prod'
+          }
+        },
+        {
+          urlPattern: new RegExp('https://chalhoubappserver.herokuapp.com/top-headlines'),
+          handler: 'StaleWhileRevalidate',
+          options: {
+            cacheName: 'news-api-headlines-cache-prod',
           }
         }
       ]
@@ -133,5 +155,5 @@ module.exports = (env) => {
       ]
     })
   ]
-  };
-}
+  }
+};

@@ -1,4 +1,11 @@
 .not-found-page {
-    font-size: 18px;
-    color: rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 90px);
+    h1 {
+        font-size: 24px;
+        color: rgba(0,0,0,0.8);
+    }
 }

@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run start-prod",
-    "start-dev": "webpack-dev-server --hot --inline --open --mode development --config webpack.config/webpack.dev.js --env.dev",
+    "start-dev": "webpack-dev-server --hot --inline --open --mode development --config webpack.config/webpack.dev.js --env.local",
     "start-prod": "npm run build-prod && node index.js",
     "test": "jest --config=jest.config.json",
     "coverage": "jest --config=jest.config.json --coverage",
-    "build": "webpack --mode production --config webpack.config/webpack.prod.js --env.dev",
+    "build": "webpack --mode production --config webpack.config/webpack.prod.js --env.local",
     "build-prod": "npm run build && npm run test"
   },
   "jest": {
@@ -46,6 +46,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "express": "^4.17.1",
+    "file-loader": "^4.1.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "intersection-observer": "^0.7.0",
