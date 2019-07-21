@@ -5,6 +5,9 @@ to point to local api server, read the section  "Running with local api server"
 
 Deployed application url: http://chalhoubnews.herokuapp.com/
 
+Offline mode is meant to be generated only on Production mode. (to avoid cache on development mode)
+
+
 ## Tech: 
 
 * React
@@ -20,13 +23,13 @@ you need to install nodeJS
 
 ## Build
 
- in order to build this project just run
+To run this project on production mode
 
 ```
 npm start
 ```
 
- to only build the application
+To only build the application on production mode
 
 ```
 npm run build
