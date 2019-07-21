@@ -10,7 +10,7 @@
     "test": "jest --config=jest.config.json",
     "coverage": "jest --config=jest.config.json --coverage",
     "build": "webpack --mode production --config webpack.config/webpack.prod.js --env.prod",
-    "build-prod": "npm run build && npm run test"
+    "build-prod": "npm run test && npm run build"
   },
   "engines": {
     "node": "10.15.0",
