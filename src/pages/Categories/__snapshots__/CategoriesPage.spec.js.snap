@@ -1,11 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Categories Page Categories page should render correctly 1`] = `
-<div
-  className="categories-page"
->
-  <ul
-    className="article-list"
-  />
-</div>
-`;
+exports[`Categories Page Categories page should render correctly 1`] = `ReactWrapper {}`;

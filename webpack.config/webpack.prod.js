@@ -6,59 +6,60 @@ const TerserJSPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require("path");
-const baseConfig = require('../webpack.config');
-const merge = require('webpack-merge');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const webpack = require('webpack');
 
-const config = {
-  optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
-  },
-  entry: "./src/index.js",
-  output: {
-    filename: "main.[contentHash].bundle.js",
-    path: path.resolve(__dirname, "../public"),
-    publicPath: '/'
-  },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: "../public/"
-  },
+module.exports = (env) => {
+  const apiURL = env.local ? "http://localhost:5000" : "https://chalhoubappserver.herokuapp.com";
+  console.log("api url is:", apiURL, env.local);
+  return {
+    optimization: {
+      minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})]
+    },
+    entry: "./src/index.js",
+    output: {
+      filename: "main.[contentHash].bundle.js",
+      path: path.resolve(__dirname, "../public"),
+      publicPath: '/'
+    },
+    devServer: {
+      historyApiFallback: true,
+      contentBase: "../public/"
+    },
 
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
-      },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: "html-loader"
+    module: {
+      rules: [
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          use: {
+            loader: "babel-loader"
           }
-        ]
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          "style-loader",
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "postcss-loader",
-          "sass-loader"
-        ]
-      }
-    ]
-  },
-  plugins: [
+        },
+        {
+          test: /\.html$/,
+          use: [
+            {
+              loader: "html-loader"
+            }
+          ]
+        },
+        {
+          test: /\.scss$/,
+          use: [
+            "style-loader",
+            MiniCssExtractPlugin.loader,
+            "css-loader",
+            "postcss-loader",
+            "sass-loader"
+          ]
+        }
+      ]
+    },
+    plugins: [
     new webpack.DefinePlugin({
-      "API_URL": JSON.stringify("https://chalhoubappserver.herokuapp.com")
+      "API_URL": JSON.stringify(apiURL)
     }),
     new CleanWebpackPlugin(),
     new HtmlWebPackPlugin({ template: "src/index.html" }),
@@ -100,14 +101,14 @@ const config = {
           }
         },
         {
-          urlPattern: new RegExp('https://chalhoubappserver.herokuapp.com/categories'),
+          urlPattern: new RegExp(`${apiURL}/categories`),
           handler: 'StaleWhileRevalidate',
           options: {
             cacheName: 'news-api-category-cache'
           }
         },
         {
-          urlPattern: new RegExp('https://chalhoubappserver.herokuapp.com/top-headlines'),
+          urlPattern: new RegExp(`${apiURL}/top-headlines`),
           handler: 'StaleWhileRevalidate',
           options: {
             cacheName: 'news-api-headlines-cache',
@@ -132,6 +133,5 @@ const config = {
       ]
     })
   ]
-};
-
-module.exports = merge(baseConfig, config);
+  };
+}

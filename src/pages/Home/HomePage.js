@@ -11,9 +11,8 @@ class HomePage extends Component {
         };
 
         this.fetchNews = this.fetchNews.bind(this);
-        this.scrollHandler = this.scrollHandler.bind(this);
 
-        window.onscroll = this.scrollHandler;
+        window.addEventListener('scroll', this.scrollHandler.bind(this));
     }
 
     async componentDidMount() {
@@ -38,6 +37,10 @@ class HomePage extends Component {
         if (scrollPos > offset  && !this.state.loading) {
             await this.fetchNews();
         }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.scrollHandler);
     }
 
     render() {

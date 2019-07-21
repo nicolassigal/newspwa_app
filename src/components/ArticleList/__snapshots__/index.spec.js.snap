@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArticleList component test ArticleList component should render correctly 1`] = `ShallowWrapper {}`;
+
+exports[`ArticleList component test ArticleList component should render with list 1`] = `ShallowWrapper {}`;

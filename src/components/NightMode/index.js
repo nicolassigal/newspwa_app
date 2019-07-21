@@ -9,16 +9,6 @@ const NightMode = () => {
        mode = el.checked ? 'dark': 'light';
        localStorage.setItem('theme', mode);
        document.documentElement.setAttribute('data-theme', mode);
-       console.log(getStatus());
-    }
-
-    const getStatus = () => {
-        if(el) {
-            let mode = localStorage.getItem('theme');
-           return mode === 'dark';
-        } else {
-            return false;
-        }
     }
     
     return (

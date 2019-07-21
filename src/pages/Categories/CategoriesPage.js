@@ -11,9 +11,8 @@ class CategoriesPage extends Component {
         }
 
         this.fetchNewsHandler = this.fetchNewsHandler.bind(this);
-        this.scrollHandler = this.scrollHandler.bind(this);
 
-        window.onscroll = this.scrollHandler;
+        window.addEventListener('scroll', this.scrollHandler.bind(this));
     }
 
     async componentDidMount(){
@@ -52,6 +51,10 @@ class CategoriesPage extends Component {
         if (scrollPos > offset && !this.state.loading) {
             await this.fetchNewsHandler();
         }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.scrollHandler);
     }
 
     render() {

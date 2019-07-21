@@ -1,5 +1,3 @@
-const merge = require('webpack-merge');
-const baseConfig = require('../webpack.config');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
@@ -8,7 +6,10 @@ const path = require("path");
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const webpack = require('webpack');
 
-const config = {
+module.exports = env => {
+  const apiURL = env.local ? "http://localhost:5000" : "https://chalhoubappserver.herokuapp.com";
+  console.log("API url is:", apiURL, env.local);
+  return {
     entry: "./src/index.js",
     output: {
       filename: "main.bundle.js",
@@ -53,7 +54,7 @@ const config = {
       },
     plugins: [
       new webpack.DefinePlugin({
-        "API_URL": JSON.stringify("http://localhost:5000")
+        "API_URL": JSON.stringify(apiURL)
       }),
         new CleanWebpackPlugin(),
         new HtmlWebPackPlugin({ template: "src/index.html" }),
@@ -98,14 +99,14 @@ const config = {
               }
             },
             {
-              urlPattern: new RegExp('http://localhost:5000/categories'),
+              urlPattern: new RegExp(`${apiURL}/categories`),
               handler: 'StaleWhileRevalidate',
               options: {
                 cacheName: 'news-api-category-cache'
               }
             },
             {
-              urlPattern: new RegExp('http://localhost:5000/top-headlines'),
+              urlPattern: new RegExp(`${apiURL}/top-headlines`),
               handler: 'StaleWhileRevalidate',
               options: {
                 cacheName: 'news-api-headlines-cache',
@@ -114,6 +115,5 @@ const config = {
           ]
         }),
       ] 
+  }
 }
-
-module.exports = merge(baseConfig, config);
